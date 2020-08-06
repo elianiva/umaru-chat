@@ -1,0 +1,44 @@
+.container {
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(252.2deg, #ed4e4e 0%, #f9b679 98.81%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  padding: 5rem 2rem 2rem;
+  position: relative;
+  background-color: white;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 28rem;
+  box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border: 1rem #ffffff solid;
+  border-radius: 50%;
+}
+
+.message {
+  font-family: "Nunito", sans-serif;
+  text-align: center;
+  color: #555555;
+}
+
+.message a {
+  text-decoration: none;
+  color: #ed4e4e;
+  font-weight: 600;
+}
