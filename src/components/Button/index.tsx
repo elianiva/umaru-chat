@@ -3,7 +3,7 @@ import * as Style from "./style.css"
 
 interface ButtonProps {
   text: string
-  onClick?: () => void
+  onClick: () => void
   inactive?: boolean
 }
 
