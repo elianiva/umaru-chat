@@ -4,17 +4,21 @@ import * as Style from "./style.css"
 import EyeIcon from "../../assets/eye.svg"
 
 interface FormProps {
+  name: string
   type: string
   label: string
   placeholder: string
   value: string
+  onChange: any
 }
 
 const Form: FunctionalComponent<FormProps> = ({
+  name,
   type,
   label,
   placeholder,
-  value
+  value,
+  onChange
 }: FormProps) => {
   const [isVisible, setVisible] = useState(false)
 
@@ -24,10 +28,12 @@ const Form: FunctionalComponent<FormProps> = ({
       {type === "password" ? (
         <div class={Style.wrapper}>
           <input
+            name={name}
             class={Style.input}
             type={isVisible ? "text" : "password"}
             placeholder={isVisible ? "password" : placeholder}
             value={value}
+            onInput={onChange}
           />
           <div class={Style.toggler}>
             <input
@@ -40,10 +46,12 @@ const Form: FunctionalComponent<FormProps> = ({
         </div>
       ) : (
         <input
+          name={name}
           class={Style.input}
           type={type}
           placeholder={placeholder}
           value={value}
+          onInput={onChange}
         />
       )}
     </div>
