@@ -1,9 +1,9 @@
 import { FunctionalComponent, h } from "preact"
 import { Route, Router, RouterOnChangeArgs } from "preact-router"
 
-import SignIn from "../routes/SignIn"
+import Login from "../routes/Login"
 import NotFoundPage from "../routes/NotFound"
-import SignUp from "../routes/SignUp"
+import Register from "../routes/Register"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 if ((module as any).hot) {
@@ -20,8 +20,8 @@ const App: FunctionalComponent = () => {
   return (
     <div id="app">
       <Router onChange={handleRoute}>
-        <Route path="/" component={SignIn} />
-        <Route path="/signup" component={SignUp} />
+        <Route path="/" component={Login} />
+        <Route path="/signup" component={Register} />
         <NotFoundPage default />
       </Router>
     </div>
