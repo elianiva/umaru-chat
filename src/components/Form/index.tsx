@@ -7,7 +7,7 @@ interface FormProps {
   type: string
   label: string
   placeholder: string
-  value?: string
+  value: string
 }
 
 const Form: FunctionalComponent<FormProps> = ({
@@ -26,19 +26,25 @@ const Form: FunctionalComponent<FormProps> = ({
           <input
             class={Style.input}
             type={isVisible ? "text" : "password"}
-            placeholder={placeholder}
+            placeholder={isVisible ? "password" : placeholder}
+            value={value}
           />
           <div class={Style.toggler}>
             <input
               type="checkbox"
               class={Style.checkbox}
-              onChange={() => setVisible(!isVisible)}
+              onChange={() => void setVisible(!isVisible)}
             />
             <EyeIcon />
           </div>
         </div>
       ) : (
-        <input class={Style.input} type={type} placeholder={placeholder} />
+        <input
+          class={Style.input}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+        />
       )}
     </div>
   )
