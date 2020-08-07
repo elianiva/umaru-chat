@@ -7,7 +7,7 @@ const Button: FunctionalComponent<{
   inactive?: boolean
 }> = ({ text, onClick, inactive }) => {
   return (
-    <button class={inactive ? Style.active : Style.inactive} onClick={onClick}>
+    <button class={!inactive ? Style.active : Style.inactive} onClick={onClick}>
       {text}
     </button>
   )
