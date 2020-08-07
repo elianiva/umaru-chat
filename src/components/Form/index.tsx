@@ -1,18 +1,42 @@
 import { FunctionalComponent, h } from "preact"
+import { useState } from "preact/hooks"
 import * as Style from "./style.css"
+import EyeIcon from "../../assets/eye.svg"
 
 interface FormProps {
   type: string
   label: string
   placeholder: string
+  value?: string
 }
 
-const Form: FunctionalComponent<FormProps> = ({ type, label, placeholder }) => {
+const Form: FunctionalComponent<FormProps> = ({
+  type,
+  label,
+  placeholder,
+  value
+}: FormProps) => {
+  const [isVisible, setVisible] = useState(false)
+
   return (
     <div>
       <label class={Style.label}>{label}</label>
       {type === "password" ? (
-        <input class={Style.input} type={type} placeholder={placeholder} />
+        <div class={Style.wrapper}>
+          <input
+            class={Style.input}
+            type={isVisible ? "text" : "password"}
+            placeholder={placeholder}
+          />
+          <div class={Style.toggler}>
+            <input
+              type="checkbox"
+              class={Style.checkbox}
+              onChange={() => setVisible(!isVisible)}
+            />
+            <EyeIcon />
+          </div>
+        </div>
       ) : (
         <input class={Style.input} type={type} placeholder={placeholder} />
       )}
