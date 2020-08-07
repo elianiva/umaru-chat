@@ -5,30 +5,63 @@ import * as Style from "./style.css"
 import Form from "../../components/Form"
 import Button from "../../components/Button"
 import { Link } from "preact-router"
+import { useForm } from "../../hooks/useForm"
 
 const Register: FunctionalComponent = () => {
-  const [current, setCurrent] = useState(true)
+  const [firstStep, setFirstStep] = useState(true)
+  const [formValue, setFormValue] = useForm()
 
   return (
     <div class={Style.container}>
       <div class={Style.wrapper}>
         <img src={Umaru} alt="Umaru" class={Style.avatar} />
-        {current ? (
+        {firstStep ? (
           <Fragment>
-            <Form type="text" label="Username" placeholder="Ex: elianiva" />
-            <Form type="email" label="Email" placeholder="Ex: im@elianiva.me" />
-            <Button text="Next" onClick={() => setCurrent(false)} />
+            <Form
+              name="username"
+              type="text"
+              label="Username"
+              placeholder="Ex: elianiva"
+              value={formValue.username}
+              onChange={e => setFormValue(e)}
+            />
+            <Form
+              name="email"
+              type="email"
+              label="Email"
+              placeholder="Ex: im@elianiva.me"
+              value={formValue.email}
+              onChange={e => setFormValue(e)}
+            />
+            <Button text="Next" onClick={() => setFirstStep(false)} />
           </Fragment>
         ) : (
           <Fragment>
-            <Form type="password" label="Password" placeholder="••••••••••" />
             <Form
+              name="password"
+              type="password"
+              label="Password"
+              placeholder="••••••••••"
+              value={formValue.password}
+              onChange={e => setFormValue(e)}
+            />
+            <Form
+              name="password2"
               type="password"
               label="Reenter Password"
               placeholder="••••••••••"
+              value={formValue.password2}
+              onChange={e => setFormValue(e)}
             />
-            <Button text="Next" onClick={() => setCurrent(false)} />
-            <Button text="Back" onClick={() => setCurrent(true)} inactive />
+            <Button
+              text={firstStep ? "Next" : "Register"}
+              onClick={
+                firstStep
+                  ? () => setFirstStep(false)
+                  : () => console.log(formValue)
+              }
+            />
+            <Button text="Back" onClick={() => setFirstStep(true)} inactive />
           </Fragment>
         )}
         <span class={Style.message}>
