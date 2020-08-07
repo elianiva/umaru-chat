@@ -1,11 +1,17 @@
 import { FunctionalComponent, h } from "preact"
 import * as Style from "./style.css"
 
-const Button: FunctionalComponent<{
+interface ButtonProps {
   text: string
   onClick?: () => void
   inactive?: boolean
-}> = ({ text, onClick, inactive }) => {
+}
+
+const Button: FunctionalComponent<ButtonProps> = ({
+  text,
+  onClick,
+  inactive
+}: ButtonProps) => {
   return (
     <button class={!inactive ? Style.active : Style.inactive} onClick={onClick}>
       {text}
