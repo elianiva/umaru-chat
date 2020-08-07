@@ -6,7 +6,7 @@ import Form from "../../components/Form"
 import Button from "../../components/Button"
 import { Link } from "preact-router"
 
-const SignUp: FunctionalComponent = () => {
+const Register: FunctionalComponent = () => {
   const [current, setCurrent] = useState(true)
 
   return (
@@ -32,11 +32,11 @@ const SignUp: FunctionalComponent = () => {
           </Fragment>
         )}
         <span class={Style.message}>
-          Already have an account? <Link href="/">Sign in here</Link>
+          Already have an account? <Link href="/">Login here</Link>
         </span>
       </div>
     </div>
   )
 }
 
-export default SignUp
+export default Register
