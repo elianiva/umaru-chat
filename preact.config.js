@@ -1,4 +1,6 @@
 import { resolve } from "path"
+import * as process from "process"
+import preactCliSvgLoader from "preact-cli-svg-loader"
 
 export default {
   /**
@@ -11,6 +13,8 @@ export default {
    * @param {object} options - this is mainly relevant for plugins (will always be empty in the config), default to an empty object
    **/
   webpack(config, env, helpers, options) {
+    preactCliSvgLoader(config, helpers)
+
     config.module.rules[4].use.splice(1, 0, {
       loader: "@teamsupercell/typings-for-css-modules-loader",
       options: {
