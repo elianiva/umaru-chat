@@ -10,7 +10,7 @@ interface FormProps {
   placeholder: string
   value: string
   onChange: any
-  autocomplete?: boolean
+  autocomplete: string
 }
 
 const Form: FunctionalComponent<FormProps> = ({
@@ -36,6 +36,7 @@ const Form: FunctionalComponent<FormProps> = ({
             placeholder={isVisible ? "password" : placeholder}
             value={value}
             onInput={onChange}
+            required
           />
           <div class={Style.toggler}>
             <input
@@ -54,7 +55,8 @@ const Form: FunctionalComponent<FormProps> = ({
           placeholder={placeholder}
           value={value}
           onInput={onChange}
-          autoComplete={autocomplete ? "on" : "off"}
+          autoComplete={autocomplete}
+          required
         />
       )}
     </div>

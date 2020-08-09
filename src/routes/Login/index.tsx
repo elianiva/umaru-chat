@@ -1,5 +1,4 @@
 import { FunctionalComponent, h } from "preact"
-import { useEffect } from "preact/hooks"
 import Umaru from "../../assets/umaru.png"
 import * as Style from "./style.css"
 import Form from "../../components/Form"
@@ -21,6 +20,7 @@ const Login: FunctionalComponent = () => {
           placeholder="Ex: im@elianiva.me"
           value={formValue.email}
           onChange={e => setFormValue(e)}
+          autocomplete="email"
         />
         <Form
           name="password"
@@ -29,6 +29,7 @@ const Login: FunctionalComponent = () => {
           placeholder="••••••••••"
           value={formValue.password}
           onChange={e => setFormValue(e)}
+          autocomplete="off"
         />
         <Button text="Login" onClick={() => console.log(formValue)} />
         <span class={Style.message}>
