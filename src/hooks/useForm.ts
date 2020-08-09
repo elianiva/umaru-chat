@@ -1,7 +1,7 @@
 import { useState } from "preact/hooks"
 
 export const useForm = () => {
-  const [values, setValues] = useState({})
+  const [values, setValues] = useState<{ [key: string]: string }>({})
 
   const handleChange = (e: InputEvent) => {
     setValues(values => ({
