@@ -24,6 +24,7 @@ const Register: FunctionalComponent = () => {
               placeholder="Ex: elianiva"
               value={formValue.username}
               onChange={e => setFormValue(e)}
+              autocomplete
             />
             <Form
               name="email"
@@ -32,6 +33,7 @@ const Register: FunctionalComponent = () => {
               placeholder="Ex: im@elianiva.me"
               value={formValue.email}
               onChange={e => setFormValue(e)}
+              autocomplete
             />
             <Button text="Next" onClick={() => setFirstStep(false)} />
           </Fragment>

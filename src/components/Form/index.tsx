@@ -10,6 +10,7 @@ interface FormProps {
   placeholder: string
   value: string
   onChange: any
+  autocomplete?: boolean
 }
 
 const Form: FunctionalComponent<FormProps> = ({
@@ -18,7 +19,8 @@ const Form: FunctionalComponent<FormProps> = ({
   label,
   placeholder,
   value,
-  onChange
+  onChange,
+  autocomplete
 }: FormProps) => {
   const [isVisible, setVisible] = useState(false)
 
@@ -52,6 +54,7 @@ const Form: FunctionalComponent<FormProps> = ({
           placeholder={placeholder}
           value={value}
           onInput={onChange}
+          autoComplete={autocomplete ? "on" : "off"}
         />
       )}
     </div>
