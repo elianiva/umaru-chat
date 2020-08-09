@@ -11,5 +11,5 @@ export const useForm = () => {
     }))
   }
 
-  return [values, handleChange]
+  return [values, handleChange] as const
 }
