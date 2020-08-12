@@ -9,6 +9,11 @@ module.exports = {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js"
   },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: "./",
+    hot: true
+  },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"]
   },

@@ -43,7 +43,7 @@ const Form: FunctionComponent<FormProps> = ({
               className="form__checkbox"
               onChange={() => void setVisible(!isVisible)}
             />
-            {/* <EyeIcon /> */}
+            <EyeIcon />
           </div>
         </div>
       ) : (
