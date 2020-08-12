@@ -11,7 +11,7 @@ const Register: FunctionComponent = () => {
   const [formValue, setFormValue] = useForm()
 
   return (
-    <div className="login__container">
+    <div className="login">
       <div className="login__wrapper">
         <img src={Umaru} alt="Umaru" className="login__avatar" />
         {firstStep ? (
