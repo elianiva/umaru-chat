@@ -14,7 +14,7 @@
   transition: all ease-out 0.2s;
 }
 
-.inactive {
+.button--inactive {
   border: none;
   background: none;
   font-family: "Nunito", sans-serif;
