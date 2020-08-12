@@ -1,0 +1,60 @@
+.form__wrapper {
+  position: relative;
+}
+
+.form__label {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  display: block;
+  color: #3a1f1f;
+  margin-bottom: 0.5rem;
+}
+
+.form__input {
+  border: none;
+  outline: none;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  background-color: #efefef;
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  font-size: 1.125rem;
+  width: 100%;
+}
+
+.form__input::placeholder {
+  color: #8e8e8e;
+}
+
+.form__toggler {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 30%;
+  right: 0;
+}
+
+.form__toggler svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #8e8e8e;
+  position: relative;
+  z-index: 2;
+  margin-right: 1rem;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.form__checkbox {
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  right: 0.5rem;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.form__checkbox:checked + svg {
+  color: #3a1f1f;
+}
