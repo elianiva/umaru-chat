@@ -6,6 +6,7 @@ interface ButtonProps {
   onClick: () => void
   inactive?: boolean
   disabled?: boolean
+  type?: string
 }
 
 const Button: FunctionComponent<ButtonProps> = ({
@@ -13,10 +14,11 @@ const Button: FunctionComponent<ButtonProps> = ({
   onClick,
   inactive,
   disabled,
+  type,
 }: ButtonProps) => {
   return (
     <button
-      className={!inactive ? "button--active" : "button--inactive"}
+      className={!inactive ? "button--active" : `button--inactive ${type}`}
       onClick={onClick}
       disabled={disabled}
     >

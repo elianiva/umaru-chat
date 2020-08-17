@@ -21,16 +21,23 @@
   font-weight: 700;
   font-size: 1.125rem;
   color: #b0b0b0;
-  width: 40%;
-  margin: 0 auto 1rem;
   cursor: pointer;
   transition: all ease-out 0.2s;
+}
+
+.register {
+  margin: 0 auto 1rem;
+  width: 40%;
+}
+
+.logout {
+  margin: 0;
 }
 
 .button--active:not(:disabled):hover,
 .button--inactive:not(:disabled):hover {
   filter: brightness(1.1);
-  transform: translateY(-0.2rem);
+  transform: translateY(-0.1rem);
 }
 
 button:disabled {
