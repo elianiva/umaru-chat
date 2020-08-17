@@ -1,14 +1,12 @@
 import { useState } from "react"
 
-export const useForm = () => {
-  const [values, setValues] = useState<{ [key: string]: string }>({})
+type AnyObject = { [key: string]: string }
 
-  const handleChange = (e: InputEvent) => {
-    setValues((values) => ({
-      ...values,
-      [(e?.target as HTMLInputElement)?.name]: (e?.target as HTMLInputElement)
-        ?.value,
-    }))
+export const useForm = (initialValue: AnyObject) => {
+  const [values, setValues] = useState<AnyObject>(initialValue)
+
+  const handleChange = (name: string, value: string) => {
+    setValues({ ...values, [name]: value })
   }
 
   return [values, handleChange] as const

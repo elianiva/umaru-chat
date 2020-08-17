@@ -7,7 +7,10 @@ import { useForm } from "../../hooks/useForm"
 import "./style.css"
 
 const Login: FunctionComponent = () => {
-  const [formValue, setFormValue] = useForm()
+  const [formValue, setFormValue] = useForm({
+    email: "",
+    password: "",
+  })
 
   return (
     <div className="login">
@@ -19,7 +22,12 @@ const Login: FunctionComponent = () => {
           label="Email"
           placeholder="Ex: im@elianiva.me"
           value={formValue.email}
-          onChange={(e: InputEvent) => setFormValue(e)}
+          onChange={(e: InputEvent) =>
+            setFormValue(
+              (e?.target as HTMLInputElement)?.name,
+              (e?.target as HTMLInputElement)?.value
+            )
+          }
           autocomplete="email"
         />
         <Form
@@ -28,7 +36,12 @@ const Login: FunctionComponent = () => {
           label="Password"
           placeholder="••••••••••"
           value={formValue.password}
-          onChange={(e: InputEvent) => setFormValue(e)}
+          onChange={(e: InputEvent) =>
+            setFormValue(
+              (e?.target as HTMLInputElement)?.name,
+              (e?.target as HTMLInputElement)?.value
+            )
+          }
           autocomplete="off"
         />
         <Button text="Login" onClick={() => console.log(formValue)} />

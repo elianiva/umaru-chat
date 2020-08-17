@@ -8,7 +8,12 @@ import "./style.css"
 
 const Register: FunctionComponent = () => {
   const [firstStep, setFirstStep] = useState(true)
-  const [formValue, setFormValue] = useForm()
+  const [formValue, setFormValue] = useForm({
+    username: "",
+    email: "",
+    password: "",
+    password2: "",
+  })
 
   return (
     <div className="login">
@@ -22,7 +27,12 @@ const Register: FunctionComponent = () => {
               label="Username"
               placeholder="Ex: elianiva"
               value={formValue.username}
-              onChange={(e: InputEvent) => setFormValue(e)}
+              onChange={(e: InputEvent) =>
+                setFormValue(
+                  (e?.target as HTMLInputElement)?.name,
+                  (e?.target as HTMLInputElement)?.value
+                )
+              }
               autocomplete="username"
             />
             <Form
@@ -31,7 +41,12 @@ const Register: FunctionComponent = () => {
               label="Email"
               placeholder="Ex: im@elianiva.me"
               value={formValue.email}
-              onChange={(e: InputEvent) => setFormValue(e)}
+              onChange={(e: InputEvent) =>
+                setFormValue(
+                  (e?.target as HTMLInputElement)?.name,
+                  (e?.target as HTMLInputElement)?.value
+                )
+              }
               autocomplete="email"
             />
             <Button text="Next" onClick={() => setFirstStep(false)} />
@@ -44,7 +59,12 @@ const Register: FunctionComponent = () => {
               label="Password"
               placeholder="••••••••••"
               value={formValue.password}
-              onChange={(e: InputEvent) => setFormValue(e)}
+              onChange={(e: InputEvent) =>
+                setFormValue(
+                  (e?.target as HTMLInputElement)?.name,
+                  (e?.target as HTMLInputElement)?.value
+                )
+              }
               autocomplete="off"
             />
             <Form
@@ -53,7 +73,12 @@ const Register: FunctionComponent = () => {
               label="Reenter Password"
               placeholder="••••••••••"
               value={formValue.password2}
-              onChange={(e: InputEvent) => setFormValue(e)}
+              onChange={(e: InputEvent) =>
+                setFormValue(
+                  (e?.target as HTMLInputElement)?.name,
+                  (e?.target as HTMLInputElement)?.value
+                )
+              }
               autocomplete="off"
             />
             <Button
