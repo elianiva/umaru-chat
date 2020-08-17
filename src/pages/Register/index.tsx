@@ -1,10 +1,11 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useState, useContext } from "react"
 import Umaru from "../../assets/umaru.png"
 import Form from "../../components/Form"
 import Button from "../../components/Button"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import "./style.css"
+import { FirebaseContext } from "../../components/Firebase"
 
 const Register: FunctionComponent = () => {
   const [firstStep, setFirstStep] = useState(true)
@@ -14,10 +15,20 @@ const Register: FunctionComponent = () => {
     password: "",
     password2: "",
   })
+  const firebase = useContext(FirebaseContext)
+  const history = useHistory()
 
   const isInvalid = formValue.username === "" || formValue.email === ""
   const isPasswordInvalid =
     formValue.password !== formValue.password2 || formValue.password === ""
+
+  const register = () => {
+    const { username, email, password } = formValue
+    firebase.register(email, password).then(() => {
+      history.push("/login")
+    })
+  }
+
   return (
     <div className="login">
       <div className="login__wrapper">
@@ -91,11 +102,14 @@ const Register: FunctionComponent = () => {
             <Button
               disabled={isPasswordInvalid}
               text={firstStep ? "Next" : "Register"}
-              onClick={
-                firstStep ? () => setFirstStep(false) : () => registerAccount()
-              }
+              onClick={firstStep ? () => setFirstStep(false) : () => register()}
             />
-            <Button text="Back" onClick={() => setFirstStep(true)} inactive />
+            <Button
+              text="Back"
+              onClick={() => setFirstStep(true)}
+              inactive
+              type="register"
+            />
           </>
         )}
         <span className="login__message">

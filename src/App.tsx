@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import "./styles/index.css"
 import Notfound from "./pages/NotFound"
+import RoomList from "./pages/RoomList"
 
 export default function App() {
   return (
@@ -17,6 +18,9 @@ export default function App() {
         </Route>
         <Route path="/register">
           <Register />
+        </Route>
+        <Route path="/rooms">
+          <RoomList />
         </Route>
         <Route path="*">
           <Notfound />

@@ -2,14 +2,14 @@ import app from "firebase/app"
 import "firebase/auth"
 
 const config = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  databaseURL: process.env.DATABASE_URL,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENT_ID,
+  apiKey: "AIzaSyBY-TMRxlkaRXB9_HfcwAMvjk8-L-l4RJM",
+  authDomain: "umaru-chat.firebaseapp.com",
+  databaseURL: "https://umaru-chat.firebaseio.com",
+  projectId: "umaru-chat",
+  storageBucket: "umaru-chat.appspot.com",
+  messagingSenderId: "90854893572",
+  appId: "1:90854893572:web:6eec404000f43e5ec4ad51",
+  measurementId: "G-Z03MRT5DFV",
 }
 
 class Firebase {
@@ -21,23 +21,23 @@ class Firebase {
   }
 
   register(email: string, password: string) {
-    this.auth.createUserWithEmailAndPassword(email, password)
+    return this.auth.createUserWithEmailAndPassword(email, password)
   }
 
   login(email: string, password: string) {
-    this.auth.signInWithEmailAndPassword(email, password)
+    return this.auth.signInWithEmailAndPassword(email, password)
   }
 
   logout() {
-    this.auth.signOut()
+    return this.auth.signOut()
   }
 
   resetPassword(email: string) {
-    this.auth.sendPasswordResetEmail(email)
+    return this.auth.sendPasswordResetEmail(email)
   }
 
   updatePassword(password: string) {
-    this.auth.currentUser.updatePassword(password)
+    return this.auth.currentUser.updatePassword(password)
   }
 }
 
