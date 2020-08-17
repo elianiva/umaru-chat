@@ -17,14 +17,14 @@ const RoomList: FunctionComponent = () => {
   const user = useContext(UserContext)
 
   useEffect(() => {
-    console.log(user)
+    console.log(user.data)
   }, [user])
 
   return (
     <div>
       <Navbar onClick={logout} />
       <div className="room">
-        <h1>Name:</h1>
+        <h1>Email: {user.data.email}</h1>
       </div>
     </div>
   )

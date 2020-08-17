@@ -5,7 +5,7 @@ import Button from "../../components/Button"
 import { Link, useHistory } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import "./style.css"
-import { FirebaseContext } from "../../components/Firebase"
+import { FirebaseContext, UserContext } from "../../components/Firebase"
 
 const Register: FunctionComponent = () => {
   const [firstStep, setFirstStep] = useState(true)
@@ -16,6 +16,7 @@ const Register: FunctionComponent = () => {
     password2: "",
   })
   const firebase = useContext(FirebaseContext)
+  const user = useContext(UserContext)
   const history = useHistory()
 
   const isInvalid = formValue.username === "" || formValue.email === ""
@@ -24,7 +25,8 @@ const Register: FunctionComponent = () => {
 
   const register = () => {
     const { username, email, password } = formValue
-    firebase.register(email, password).then(() => {
+    firebase.register(email, password).then((userData: any) => {
+      userData.user.updateProfile({ displayName: username })
       history.push("/login")
     })
   }
