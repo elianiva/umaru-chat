@@ -15,6 +15,9 @@ const Register: FunctionComponent = () => {
     password2: "",
   })
 
+  const isInvalid = formValue.username === "" || formValue.email === ""
+  const isPasswordInvalid =
+    formValue.password !== formValue.password2 || formValue.password === ""
   return (
     <div className="login">
       <div className="login__wrapper">
@@ -49,7 +52,11 @@ const Register: FunctionComponent = () => {
               }
               autocomplete="email"
             />
-            <Button text="Next" onClick={() => setFirstStep(false)} />
+            <Button
+              disabled={isInvalid}
+              text={firstStep ? "Next" : "Register"}
+              onClick={() => setFirstStep(false)}
+            />
           </>
         ) : (
           <>
@@ -82,11 +89,10 @@ const Register: FunctionComponent = () => {
               autocomplete="off"
             />
             <Button
+              disabled={isPasswordInvalid}
               text={firstStep ? "Next" : "Register"}
               onClick={
-                firstStep
-                  ? () => setFirstStep(false)
-                  : () => console.log(formValue)
+                firstStep ? () => setFirstStep(false) : () => registerAccount()
               }
             />
             <Button text="Back" onClick={() => setFirstStep(true)} inactive />
