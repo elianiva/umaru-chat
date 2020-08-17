@@ -5,6 +5,7 @@ import Register from "./pages/Register"
 import "./styles/index.css"
 import Notfound from "./pages/NotFound"
 import RoomList from "./pages/RoomList"
+import PrivateRoute from "./components/PrivateRoute"
 
 export default function App() {
   return (
@@ -19,9 +20,9 @@ export default function App() {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/rooms">
+        <PrivateRoute path="/rooms">
           <RoomList />
-        </Route>
+        </PrivateRoute>
         <Route path="*">
           <Notfound />
         </Route>
