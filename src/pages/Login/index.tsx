@@ -22,6 +22,7 @@ const Login: FunctionComponent = () => {
     const { email, password } = formValue
     firebase.login(email, password).then((userData: any) => {
       user.setData(userData.user)
+      localStorage.setItem("user", JSON.stringify(userData.user))
       history.push("/rooms")
     })
   }

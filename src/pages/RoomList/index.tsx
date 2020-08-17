@@ -7,23 +7,24 @@ import "./style.css"
 const RoomList: FunctionComponent = () => {
   const firebase = useContext(FirebaseContext)
   const history = useHistory()
-
-  const logout = () => {
-    firebase.logout().then(() => {
-      history.push("/login")
-    })
-  }
-
   const user = useContext(UserContext)
 
   useEffect(() => {
     console.log(user.data)
   }, [user])
 
+  const logout = () => {
+    firebase.logout().then(() => {
+      history.push("/login")
+      localStorage.clear()
+    })
+  }
+
   return (
     <div>
       <Navbar onClick={logout} />
       <div className="room">
+        <h1>Username: {user.data.displayName}</h1>
         <h1>Email: {user.data.email}</h1>
       </div>
     </div>

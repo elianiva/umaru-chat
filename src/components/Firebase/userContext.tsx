@@ -3,9 +3,9 @@ import React, { createContext, useState, FunctionComponent } from "react"
 const UserContext = createContext<any | null>(null)
 
 const UserProvider: FunctionComponent = ({ children }) => {
-  const [userData, setUserData] = useState({ authUser: null })
+  const [userData, setUserData] = useState()
   const value = {
-    data: userData,
+    data: JSON.parse(localStorage.getItem("user") as string) || userData,
     setData: (value: any) => setUserData(value),
   }
 
