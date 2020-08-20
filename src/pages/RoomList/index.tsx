@@ -4,6 +4,7 @@ import { FirebaseContext, UserContext } from "../../components/Firebase"
 import Navbar from "../../components/Navbar"
 import ProfileCard from "../../components/ProfileCard"
 import "./style.css"
+import RoomCard from "../../components/RoomCard"
 
 const RoomList: FunctionComponent = () => {
   const firebase = useContext(FirebaseContext)
@@ -27,6 +28,16 @@ const RoomList: FunctionComponent = () => {
       <Navbar onClick={logout} />
       <div className="room">
         <ProfileCard name={displayName} email={email} pict={defaultProfile} />
+        <h1 className="room__title">Room List</h1>
+        {[1, 2, 3, 4].map((item) => (
+          <RoomCard
+            title="anjay mabar"
+            desc="room ga jelas buat bacot njir oakwoakw "
+            url="#"
+            current={4}
+            max={10}
+          />
+        ))}
       </div>
     </div>
   )

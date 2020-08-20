@@ -8,3 +8,8 @@
 .room__greet {
   font-size: 1.75rem;
 }
+
+.room__title {
+  margin: 2rem 0 1rem;
+  font-size: 1.75rem;
+}
