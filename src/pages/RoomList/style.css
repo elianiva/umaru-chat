@@ -1,3 +1,10 @@
 .room {
   display: grid;
+  max-width: 960px;
+  margin: 0 auto;
+  font-family: "Nunito", sans-serif;
+}
+
+.room__greet {
+  font-size: 1.75rem;
 }
