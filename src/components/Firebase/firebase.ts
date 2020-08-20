@@ -1,5 +1,6 @@
 import app from "firebase/app"
 import "firebase/auth"
+import "firebase/storage"
 
 const config = {
   apiKey: "AIzaSyBY-TMRxlkaRXB9_HfcwAMvjk8-L-l4RJM",
@@ -14,10 +15,12 @@ const config = {
 
 class Firebase {
   auth: any
+  storage: any
   constructor() {
     app.initializeApp(config)
 
     this.auth = app.auth()
+    this.storage = app.storage()
   }
 
   register(email: string, password: string) {
