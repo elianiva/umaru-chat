@@ -4,6 +4,7 @@
   padding: 2rem;
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
+  background-color: #ffffff;
 }
 
 .profile__left {
@@ -47,6 +48,11 @@
   background-color: #f69a6d;
   color: #ffffff;
   font-size: 1rem;
+  cursor: pointer;
+}
+
+.profile__button:hover {
+  filter: brightness(0.95);
 }
 
 .inactive {

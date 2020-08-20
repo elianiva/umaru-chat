@@ -1,8 +1,9 @@
 .navbar {
   padding: 1rem;
   font-family: "Nunito", Arial, Helvetica, sans-serif;
-  border-bottom: 0.125rem #d4d4d4 solid;
+  border-bottom: 0.125rem #efefef solid;
   margin-bottom: 2rem;
+  background-color: #ffffff;
 }
 
 .navbar__container {

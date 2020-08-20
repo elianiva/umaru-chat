@@ -2,6 +2,7 @@
   display: grid;
   max-width: 960px;
   margin: 0 auto;
+  padding: 0 2rem;
   font-family: "Nunito", sans-serif;
 }
 
@@ -12,4 +13,12 @@
 .room__title {
   margin: 2rem 0 1rem;
   font-size: 1.75rem;
+}
+
+.room__notice {
+  text-align: center;
+  display: block;
+  font-size: 2rem;
+  color: #ababab;
+  margin-top: 4rem;
 }
