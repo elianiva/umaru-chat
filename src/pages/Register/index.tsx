@@ -25,7 +25,7 @@ const Register: FunctionComponent = () => {
 
   const register = () => {
     const { username, email, password } = formValue
-    firebase.register(email, password).then((userData: any) => {
+    firebase.register(email, password).then((userData) => {
       userData.user.updateProfile({ displayName: username })
       history.push("/login")
     })
