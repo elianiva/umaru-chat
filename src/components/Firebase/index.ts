@@ -1,5 +1,5 @@
 import Firebase from "./firebase"
-import FirebaseContext from "./context"
+import FirebaseContext from "./firebaseContext"
 import UserProvider, { UserContext } from "./userContext"
 
 export default Firebase
