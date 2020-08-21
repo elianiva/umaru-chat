@@ -1,0 +1,39 @@
+.popup {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.75);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.popup__box {
+  padding: 2rem;
+  width: 40%;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 12;
+}
+
+.popup__title {
+  font-size: 1.5rem;
+  font-family: "Nunito", sans-serif;
+  margin-bottom: 2rem;
+}
+
+.popup__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.popup__buttons button {
+  flex: 1;
+  margin-top: 1rem;
+}

@@ -10,6 +10,7 @@ import Navbar from "../../components/Navbar"
 import ProfileCard from "../../components/ProfileCard"
 import "./style.css"
 import RoomCard from "../../components/RoomCard"
+import PopUp from "../../components/PopUp"
 
 const RoomList: FunctionComponent = () => {
   const firebase = useContext(FirebaseContext)
@@ -52,6 +53,7 @@ const RoomList: FunctionComponent = () => {
   return (
     <div>
       <Navbar onClick={logout} />
+      {user.popup.isVisible && <PopUp />}
       <div className="room">
         <ProfileCard name={displayName} email={email} pict={defaultProfile} />
         <h1 className="room__title">Room List</h1>
