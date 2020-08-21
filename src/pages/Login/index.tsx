@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext } from "react"
+import React, { FunctionComponent, useContext, useEffect } from "react"
 import Umaru from "../../assets/umaru.png"
 import Form from "../../components/Form"
 import Button from "../../components/Button"
@@ -26,6 +26,10 @@ const Login: FunctionComponent = () => {
       history.push("/rooms")
     })
   }
+
+  useEffect(() => {
+    localStorage.getItem("user") && history.push("/rooms")
+  }, [])
 
   return (
     <div className="login">

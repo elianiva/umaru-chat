@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useState, useContext } from "react"
+import React, {
+  FunctionComponent,
+  useState,
+  useContext,
+  useEffect,
+} from "react"
 import Umaru from "../../assets/umaru.png"
 import Form from "../../components/Form"
 import Button from "../../components/Button"
@@ -30,6 +35,10 @@ const Register: FunctionComponent = () => {
       history.push("/login")
     })
   }
+
+  useEffect(() => {
+    localStorage.getItem("user") && history.push("/rooms")
+  }, [])
 
   return (
     <div className="login">
