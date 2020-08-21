@@ -15,7 +15,7 @@ const Register: FunctionComponent = () => {
     password: "",
     password2: "",
   })
-  const firebase = useContext(FirebaseContext)
+  const firebase: any = useContext(FirebaseContext)
   const user = useContext(UserContext)
   const history = useHistory()
 
@@ -59,6 +59,7 @@ const Register: FunctionComponent = () => {
               disabled={isInvalid}
               text={firstStep ? "Next" : "Register"}
               onClick={() => setFirstStep(false)}
+              type="gap"
             />
           </>
         ) : (
@@ -95,12 +96,13 @@ const Register: FunctionComponent = () => {
               disabled={isPasswordInvalid}
               text={firstStep ? "Next" : "Register"}
               onClick={firstStep ? () => setFirstStep(false) : () => register()}
+              type="gap"
             />
             <Button
               text="Back"
               onClick={() => setFirstStep(true)}
               inactive
-              type="register"
+              type="gap"
             />
           </>
         )}

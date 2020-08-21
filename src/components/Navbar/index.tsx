@@ -13,7 +13,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({ onClick }: NavbarProps) => {
         <h1 className="navbar__title">
           Umaru<span className="highlight">Chat</span>
         </h1>
-        <Button onClick={onClick} text="Logout" inactive type="logout" />
+        <Button onClick={onClick} text="Logout" inactive />
       </div>
     </nav>
   )

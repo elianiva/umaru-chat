@@ -18,7 +18,9 @@ const Button: FunctionComponent<ButtonProps> = ({
 }: ButtonProps) => {
   return (
     <button
-      className={!inactive ? "button--active" : `button--inactive ${type}`}
+      className={
+        !inactive ? `button--active ${type}` : `button--inactive ${type}`
+      }
       onClick={onClick}
       disabled={disabled}
     >

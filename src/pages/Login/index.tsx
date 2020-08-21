@@ -12,7 +12,7 @@ const Login: FunctionComponent = () => {
     email: "",
     password: "",
   })
-  const firebase = useContext(FirebaseContext)
+  const firebase: any = useContext(FirebaseContext)
   const user = useContext(UserContext)
   const history = useHistory()
 
@@ -49,7 +49,12 @@ const Login: FunctionComponent = () => {
           onChange={(e) => setFormValue(e.target.name, e.target.value)}
           autocomplete="off"
         />
-        <Button disabled={isInvalid} text="Login" onClick={() => login()} />
+        <Button
+          disabled={isInvalid}
+          text="Login"
+          onClick={() => login()}
+          type="gap"
+        />
         <span className="login__message">
           Don’t have any account yet? <Link to="/register">Register here</Link>
         </span>
