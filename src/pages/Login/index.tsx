@@ -37,12 +37,7 @@ const Login: FunctionComponent = () => {
           label="Email"
           placeholder="Ex: im@elianiva.me"
           value={formValue.email}
-          onChange={(e: InputEvent) =>
-            setFormValue(
-              (e?.target as HTMLInputElement)?.name,
-              (e?.target as HTMLInputElement)?.value
-            )
-          }
+          onChange={(e) => setFormValue(e.target.name, e.target.value)}
           autocomplete="email"
         />
         <Form
@@ -51,12 +46,7 @@ const Login: FunctionComponent = () => {
           label="Password"
           placeholder="••••••••••"
           value={formValue.password}
-          onChange={(e: InputEvent) =>
-            setFormValue(
-              (e?.target as HTMLInputElement)?.name,
-              (e?.target as HTMLInputElement)?.value
-            )
-          }
+          onChange={(e) => setFormValue(e.target.name, e.target.value)}
           autocomplete="off"
         />
         <Button disabled={isInvalid} text="Login" onClick={() => login()} />

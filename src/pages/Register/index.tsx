@@ -43,12 +43,7 @@ const Register: FunctionComponent = () => {
               label="Username"
               placeholder="Ex: elianiva"
               value={formValue.username}
-              onChange={(e: InputEvent) =>
-                setFormValue(
-                  (e?.target as HTMLInputElement)?.name,
-                  (e?.target as HTMLInputElement)?.value
-                )
-              }
+              onChange={(e) => setFormValue(e.target.name, e.target.value)}
               autocomplete="username"
             />
             <Form
@@ -57,12 +52,7 @@ const Register: FunctionComponent = () => {
               label="Email"
               placeholder="Ex: im@elianiva.me"
               value={formValue.email}
-              onChange={(e: InputEvent) =>
-                setFormValue(
-                  (e?.target as HTMLInputElement)?.name,
-                  (e?.target as HTMLInputElement)?.value
-                )
-              }
+              onChange={(e) => setFormValue(e.target.name, e.target.value)}
               autocomplete="email"
             />
             <Button
