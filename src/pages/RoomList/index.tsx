@@ -25,15 +25,11 @@ const RoomList: FunctionComponent = () => {
     })
   }
 
-  const { displayName, email } = user.data
   // destructure values from context
   const {
     popup,
     data: { displayName, email, photoURL },
   } = user
-
-  const defaultProfile =
-    "https://firebasestorage.googleapis.com/v0/b/umaru-chat.appspot.com/o/user_profile%2Fdefault.svg?alt=media&token=28d6b78a-a42b-46f9-af4b-0fbb3dad8b4e"
 
   const snapshotToArray = (snapshot): any => {
     let result: any[] = []
@@ -45,11 +41,23 @@ const RoomList: FunctionComponent = () => {
     return result
   }
 
+  const updateUsername = (newName: string) => {
+    firebase.auth.onAuthStateChanged((userData) => {
+      if (userData) {
+        userData.updateProfile({ displayName: newName }).then(() => {
+          localStorage.setItem("user", JSON.stringify(userData))
+          user.setData(userData)
+        })
+      }
+    })
+  }
+
+  const createRoom = () => {}
+
   useEffect(() => {
     const fetchData = async () => {
       firebase.database.ref("rooms/").on("value", (resp) => {
         setRooms(snapshotToArray(resp))
-        console.log(snapshotToArray(resp))
       })
     }
     fetchData()
@@ -58,15 +66,16 @@ const RoomList: FunctionComponent = () => {
   return (
     <div>
       <Navbar onClick={logout} />
-      {user.popup.isVisible && <PopUp />}
-      <div className="room">
-        <ProfileCard
-          name={displayName}
-          email={email}
-          pict={photoURL}
-          changeUsername={() => popup.setEvent(() => updateUsername)}
-          createRoom={() => popup.setEvent()}
+      {user.popup.isVisible && (
+        <PopUp
+          onClick={{
+            updateUsername,
+            createRoom,
+          }}
         />
+      )}
+      <div className="room">
+        <ProfileCard name={displayName} email={email} pict={photoURL} />
         <h1 className="room__title">Room List</h1>
         <hr />
         {rooms.length < 1 ? (

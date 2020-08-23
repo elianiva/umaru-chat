@@ -5,7 +5,16 @@ import { useForm } from "../../hooks/useForm"
 import Button from "../Button"
 import { UserContext } from "../Firebase"
 
-const PopUp: FunctionComponent = () => {
+interface PopUpInterface {
+  onClick: {
+    updateUsername: (string) => void
+    createRoom: () => void
+  }
+}
+
+const PopUp: FunctionComponent<PopUpInterface> = ({
+  onClick,
+}: PopUpInterface) => {
   const [formValue, setFormValue] = useForm({
     popup: "",
   })
@@ -34,7 +43,15 @@ const PopUp: FunctionComponent = () => {
             onClick={() => popup.setVisible(false)}
             inactive
           />
-          <Button text="Confirm" onClick={() => popup.setVisible(false)} />
+          <Button
+            text="Confirm"
+            onClick={() => {
+              popup.type === "username"
+                ? onClick.updateUsername(formValue.popup)
+                : onClick.createRoom
+              popup.setVisible(false)
+            }}
+          />
         </div>
       </div>
     </div>
