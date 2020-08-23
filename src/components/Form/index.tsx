@@ -42,6 +42,7 @@ const Form: FunctionComponent<FormProps> = ({
               type="checkbox"
               className="form__checkbox"
               onChange={() => void setVisible(!isVisible)}
+              tabIndex={-1}
             />
             <EyeIcon />
           </div>
