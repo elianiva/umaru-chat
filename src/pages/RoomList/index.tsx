@@ -26,6 +26,11 @@ const RoomList: FunctionComponent = () => {
   }
 
   const { displayName, email } = user.data
+  // destructure values from context
+  const {
+    popup,
+    data: { displayName, email, photoURL },
+  } = user
 
   const defaultProfile =
     "https://firebasestorage.googleapis.com/v0/b/umaru-chat.appspot.com/o/user_profile%2Fdefault.svg?alt=media&token=28d6b78a-a42b-46f9-af4b-0fbb3dad8b4e"
@@ -55,7 +60,13 @@ const RoomList: FunctionComponent = () => {
       <Navbar onClick={logout} />
       {user.popup.isVisible && <PopUp />}
       <div className="room">
-        <ProfileCard name={displayName} email={email} pict={defaultProfile} />
+        <ProfileCard
+          name={displayName}
+          email={email}
+          pict={photoURL}
+          changeUsername={() => popup.setEvent(() => updateUsername)}
+          createRoom={() => popup.setEvent()}
+        />
         <h1 className="room__title">Room List</h1>
         <hr />
         {rooms.length < 1 ? (
