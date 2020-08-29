@@ -16,7 +16,7 @@ const RoomList: FunctionComponent = () => {
   const firebase = useContext(FirebaseContext)
   const [rooms, setRooms] = useState([])
   const history = useHistory()
-  const user = useContext(UserContext)
+  const userContext = useContext(UserContext)
 
   const logout = () => {
     firebase.logout().then(() => {
@@ -29,7 +29,7 @@ const RoomList: FunctionComponent = () => {
   const {
     popup,
     data: { displayName, email, photoURL },
-  } = user
+  } = userContext
 
   const snapshotToArray = (snapshot): any => {
     let result: any[] = []
@@ -42,11 +42,17 @@ const RoomList: FunctionComponent = () => {
   }
 
   const updateUsername = (newName: string) => {
-    firebase.auth.onAuthStateChanged((userData) => {
-      if (userData) {
-        userData.updateProfile({ displayName: newName }).then(() => {
+    firebase.auth.onAuthStateChanged((user) => {
+      if (user) {
+        user.updateProfile({ displayName: newName }).then(() => {
+          const userData = {
+            displayName: newName,
+            email: user.email,
+            uid: user.uid,
+            photoURL: user.photoURL,
+          }
+          userContext.setData(userData)
           localStorage.setItem("user", JSON.stringify(userData))
-          user.setData(userData)
         })
       }
     })
