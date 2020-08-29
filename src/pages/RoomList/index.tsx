@@ -58,7 +58,21 @@ const RoomList: FunctionComponent = () => {
     })
   }
 
-  const createRoom = () => {}
+  const createRoom = (room: { roomName: string }) => {
+    firebase.database
+      .ref("rooms/")
+      .orderByChild("roomname")
+      .equalTo(room.roomName)
+      .once("value", (snapshot) => {
+        if (snapshot.exists()) {
+          alert("Room exist")
+        } else {
+          const newRoom = firebase.database.ref("rooms/").push()
+          newRoom.set(room)
+          history.goBack()
+        }
+      })
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,7 +86,7 @@ const RoomList: FunctionComponent = () => {
   return (
     <div>
       <Navbar onClick={logout} />
-      {user.popup.isVisible && (
+      {userContext.popup.isVisible && (
         <PopUp
           onClick={{
             updateUsername,
@@ -87,12 +101,13 @@ const RoomList: FunctionComponent = () => {
         {rooms.length < 1 ? (
           <span className="room__notice">No rooms available</span>
         ) : (
-          rooms.map((room) => (
+          rooms.map((room, index) => (
             <RoomCard
+              key={index}
               title="anjay mabar"
               desc="room ga jelas buat bacot njir oakwoakw "
               url="#"
-              current={4}
+              current={0}
               max={10}
             />
           ))

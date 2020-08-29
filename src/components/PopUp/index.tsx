@@ -8,7 +8,7 @@ import { UserContext } from "../Firebase"
 interface PopUpInterface {
   onClick: {
     updateUsername: (string) => void
-    createRoom: () => void
+    createRoom: ({ roomName: string }) => void
   }
 }
 
@@ -48,7 +48,7 @@ const PopUp: FunctionComponent<PopUpInterface> = ({
             onClick={() => {
               popup.type === "username"
                 ? onClick.updateUsername(formValue.popup)
-                : onClick.createRoom
+                : onClick.createRoom({ roomName: formValue.popup })
               popup.setVisible(false)
             }}
           />
