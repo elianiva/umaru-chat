@@ -8,7 +8,7 @@ import { UserContext } from "../Firebase"
 interface PopUpInterface {
   onClick: {
     updateUsername: (string) => void
-    createRoom: ({ roomName: string }) => void
+    createRoom: (room: { roomName: string; desc: string }) => void
   }
 }
 
@@ -17,6 +17,7 @@ const PopUp: FunctionComponent<PopUpInterface> = ({
 }: PopUpInterface) => {
   const [formValue, setFormValue] = useForm({
     popup: "",
+    desc: "",
   })
   const { popup } = useContext(UserContext)
 
@@ -37,6 +38,17 @@ const PopUp: FunctionComponent<PopUpInterface> = ({
           onChange={(e) => setFormValue(e.target.name, e.target.value)}
           autocomplete="username"
         />
+        {popup.type !== "username" && (
+          <Form
+            name="desc"
+            type="text"
+            label="Short Description"
+            placeholder={"Room for casual chat"}
+            value={formValue.desc}
+            onChange={(e) => setFormValue(e.target.name, e.target.value)}
+            autocomplete="none"
+          />
+        )}
         <div className="popup__buttons">
           <Button
             text="Cancel"
@@ -48,7 +60,10 @@ const PopUp: FunctionComponent<PopUpInterface> = ({
             onClick={() => {
               popup.type === "username"
                 ? onClick.updateUsername(formValue.popup)
-                : onClick.createRoom({ roomName: formValue.popup })
+                : onClick.createRoom({
+                    roomName: formValue.popup,
+                    desc: formValue.desc,
+                  })
               popup.setVisible(false)
             }}
           />

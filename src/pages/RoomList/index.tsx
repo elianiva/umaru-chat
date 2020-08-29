@@ -58,7 +58,7 @@ const RoomList: FunctionComponent = () => {
     })
   }
 
-  const createRoom = (room: { roomName: string }) => {
+  const createRoom = (room: { roomName: string; desc: string }) => {
     firebase.database
       .ref("rooms/")
       .orderByChild("roomname")
@@ -101,11 +101,11 @@ const RoomList: FunctionComponent = () => {
         {rooms.length < 1 ? (
           <span className="room__notice">No rooms available</span>
         ) : (
-          rooms.map((room, index) => (
+          rooms.map((room: any) => (
             <RoomCard
-              key={index}
-              title="anjay mabar"
-              desc="room ga jelas buat bacot njir oakwoakw "
+              key={room.key}
+              title={room.roomName}
+              desc={room.desc}
               url="#"
               current={0}
               max={10}
