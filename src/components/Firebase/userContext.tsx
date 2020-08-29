@@ -3,7 +3,7 @@ import React, { createContext, useState, FunctionComponent } from "react"
 const UserContext = createContext<any | null>(null)
 
 const UserProvider: FunctionComponent = ({ children }) => {
-  const [userData, setUserData] = useState()
+  const [userData, setUserData] = useState({})
   const [isVisible, setVisible] = useState(false)
   const [type, setType] = useState("")
   const value = {
