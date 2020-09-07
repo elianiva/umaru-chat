@@ -1,0 +1,147 @@
+.chatroom {
+  background-color: #faede6;
+}
+
+.chatroom__side {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  min-width: 18rem;
+  background-color: #ffffff;
+}
+
+.chatroom__title {
+  background-color: #fe7970;
+  padding: 0 2rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: capitalize;
+}
+
+.chatroom__participants {
+  padding: 1rem;
+}
+
+.chatroom__ptext {
+  position: relative;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: #898989;
+}
+
+.chatroom__navbar {
+  display: flex;
+  height: 4rem;
+  padding: 0 2rem;
+  margin-left: 18rem;
+  background-color: #ffffff;
+  justify-content: flex-end;
+}
+
+.chatroom__participant {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.chatroom__participant img {
+  width: 4rem;
+  border-radius: 2rem;
+}
+
+.chatroom__username {
+  font-family: "Nunito", sans-serif;
+  font-size: 1.125rem;
+}
+
+.you {
+  font-family: "Nunito", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #fe7970;
+}
+
+.chatroom__main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 18rem;
+  height: calc(100vh - 4rem);
+}
+
+.chatroom__chats {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 0;
+  padding: 1rem;
+  gap: 1rem;
+  min-height: 100%;
+  overflow-y: auto;
+}
+
+.chatroom__chats::-webkit-scrollbar-thumb {
+  background-color: #fe7970;
+  width: 0.5rem;
+  border-radius: 0.25rem;
+  height: 10rem;
+}
+
+.chatroom__chats::-webkit-scrollbar {
+  background-color: #faede6;
+  width: 0.5rem;
+}
+
+.chatroom__chat {
+  color: #121212;
+  padding: 1rem;
+  background-color: #ffffff;
+  display: inline-block;
+  border-radius: 0.5rem;
+}
+
+.active {
+  align-self: flex-end;
+  background-color: #fe7970;
+  color: #ffffff;
+}
+
+.chatroom__input {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  background-color: #ffffff;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.chatroom__input input {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1.125rem;
+  border: 1px #b0b0b0 solid;
+  border-radius: 0.5rem;
+}
+
+.chatroom__input button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #fe7970;
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-family: "Nunito";
+  font-weight: 600;
+}
