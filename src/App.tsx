@@ -6,6 +6,7 @@ import "./styles/index.css"
 import Notfound from "./pages/NotFound"
 import RoomList from "./pages/RoomList"
 import PrivateRoute from "./components/PrivateRoute"
+import ChatRoom from "./pages/ChatRoom"
 
 export default function App() {
   return (
@@ -23,6 +24,9 @@ export default function App() {
         <PrivateRoute path="/rooms">
           <RoomList />
         </PrivateRoute>
+        <Route path="/room">
+          <ChatRoom />
+        </Route>
         <Route path="*">
           <Notfound />
         </Route>
