@@ -1,13 +1,59 @@
-import React, { FunctionComponent, useContext } from "react"
+import React, {
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useState,
+} from "react"
 import "./style.css"
 import Button from "../../components/Button"
 import { useHistory } from "react-router-dom"
-import { FirebaseContext } from "../../components/Firebase"
+import { FirebaseContext, UserContext } from "../../components/Firebase"
+import { snapshotToArray } from "../../utils/snapshotToArray"
+import { useForm } from "../../utils/useForm"
+import Tempe from "tempe"
 
 const ChatRoom: FunctionComponent = () => {
+  const [roomName, setRoomName] = useState("")
+  const [chats, setChats] = useState([])
+  const [users, setUsers] = useState([])
+  const [formValue, setFormValue] = useForm<{ message: string }>({
+    message: "",
+  })
   const firebase = useContext(FirebaseContext)
+  const user = useContext(UserContext)
   const history = useHistory()
   const username = "random dude on the internet"
+
+  const sendMessage = () => {
+    const chat = {
+      roomName,
+      displayName: user.data.displayName,
+      message: formValue.message,
+      date: Tempe(new Date()).format("hh:mm:ss"),
+      type: "message",
+    }
+    const newMessage = firebase.database.ref("chats/").push()
+    newMessage.set(chat)
+    setFormValue("message", "")
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setRoomName("njir")
+
+      firebase.database
+        .ref("chats/")
+        .orderByChild("roomName")
+        .equalTo(roomName)
+        .on("value", (resp) => {
+          setChats([])
+          setChats(snapshotToArray(resp))
+        })
+    }
+
+    fetchData()
+  }, [roomName])
+
   return (
     <div className="chatroom">
       <aside className="chatroom__side">
@@ -39,24 +85,30 @@ const ChatRoom: FunctionComponent = () => {
       </nav>
       <main className="chatroom__main">
         <div className="chatroom__chats">
-          <div className="chatroom__chat inactive">Hello there!</div>
-          <div className="chatroom__chat active">Hey!</div>
-          <div className="chatroom__chat inactive">日本語が話せますか</div>
-          <div className="chatroom__chat active">
-            はい、でも日本語はまだまだです
-          </div>
-          <div className="chatroom__chat inactive">ok cool</div>
-          <div className="chatroom__chat active">so, how's life?</div>
-          <div className="chatroom__chat inactive">
-            idk it's been the same shit everyday
-          </div>
-          <div className="chatroom__chat active">そうか</div>
-          <div className="chatroom__chat inactive">うん。。</div>
-          <div className="chatroom__chat active">じゃ、またね</div>
+          {chats.map((chat: any, index: number) => {
+            return (
+              <div
+                key={index}
+                className={`chatroom__chat ${
+                  chat.displayName === user.data.displayName
+                    ? "active"
+                    : "inacive"
+                }`}
+              >
+                {chat.message}
+              </div>
+            )
+          })}
         </div>
         <div className="chatroom__input">
-          <input type="text" placeholder="Type your message..." />
-          <button>Send</button>
+          <input
+            type="text"
+            name="message"
+            placeholder="Type your message..."
+            onChange={(e) => setFormValue(e.target.name, e.target.value)}
+            value={formValue.message}
+          />
+          <button onClick={sendMessage}>Send</button>
         </div>
       </main>
     </div>
