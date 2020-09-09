@@ -12,6 +12,7 @@ import "./style.css"
 import RoomCard from "../../components/RoomCard"
 import PopUp from "../../components/PopUp"
 import Tempe from "tempe"
+import { snapshotToArray } from "../../utils/snapshotToArray"
 
 const RoomList: FunctionComponent = () => {
   const firebase = useContext(FirebaseContext)
@@ -32,16 +33,6 @@ const RoomList: FunctionComponent = () => {
     data: { displayName, email, photoURL },
   } = userContext
 
-  const snapshotToArray = (snapshot): any => {
-    let result: any[] = []
-    snapshot.forEach((childSnapshot) => {
-      const item = childSnapshot.val()
-      item.key = childSnapshot.key
-      result.push(item)
-    })
-    return result
-  }
-
   const enterChatRoom = (roomName: string, roomId: string) => {
     let chat = {
       roomName: "",
@@ -61,7 +52,7 @@ const RoomList: FunctionComponent = () => {
     newMessage.set(chat)
 
     firebase.database
-      .ref("roomusers/")
+      .ref("roomUsers/")
       .orderByChild("roomname")
       .equalTo(roomName)
       .on("value", (resp) => {
@@ -71,7 +62,7 @@ const RoomList: FunctionComponent = () => {
           (x: any) => x.displayName === displayName
         )
         if (user !== undefined) {
-          const userRef = firebase.database.ref("roomusers/" + user.key)
+          const userRef = firebase.database.ref("roomUsers/" + user.key)
           userRef.update({ status: "online" })
         } else {
           const newRoomUser = {
@@ -79,12 +70,12 @@ const RoomList: FunctionComponent = () => {
             displayName,
             status: "online",
           }
-          const newroomuser = firebase.database.ref("roomusers/").push()
+          const newroomuser = firebase.database.ref("roomUsers/").push()
           newroomuser.set(newRoomUser)
         }
       })
 
-    history.push("/room/" + roomId)
+    history.push("/room/" + roomId.replace(/-/, ""))
   }
 
   const updateUsername = (newName: string) => {
