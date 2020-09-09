@@ -24,9 +24,9 @@ export default function App() {
         <PrivateRoute path="/rooms">
           <RoomList />
         </PrivateRoute>
-        <Route path="/room">
+        <PrivateRoute path="/room/:id">
           <ChatRoom />
-        </Route>
+        </PrivateRoute>
         <Route path="*">
           <Notfound />
         </Route>
