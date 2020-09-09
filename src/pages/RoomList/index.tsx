@@ -11,6 +11,7 @@ import ProfileCard from "../../components/ProfileCard"
 import "./style.css"
 import RoomCard from "../../components/RoomCard"
 import PopUp from "../../components/PopUp"
+import Tempe from "tempe"
 
 const RoomList: FunctionComponent = () => {
   const firebase = useContext(FirebaseContext)
@@ -41,6 +42,51 @@ const RoomList: FunctionComponent = () => {
     return result
   }
 
+  const enterChatRoom = (roomName: string, roomId: string) => {
+    let chat = {
+      roomName: "",
+      displayName: "",
+      message: "",
+      date: "",
+      type: "",
+    }
+    chat = {
+      roomName,
+      displayName,
+      date: Tempe(new Date()).format("hh:mm:ss"),
+      message: `${displayName} enter the room`,
+      type: "join",
+    }
+    const newMessage = firebase.database.ref("chats/").push()
+    newMessage.set(chat)
+
+    firebase.database
+      .ref("roomusers/")
+      .orderByChild("roomname")
+      .equalTo(roomName)
+      .on("value", (resp) => {
+        let roomuser = []
+        roomuser = snapshotToArray(resp)
+        const user: any = roomuser.find(
+          (x: any) => x.displayName === displayName
+        )
+        if (user !== undefined) {
+          const userRef = firebase.database.ref("roomusers/" + user.key)
+          userRef.update({ status: "online" })
+        } else {
+          const newRoomUser = {
+            roomName,
+            displayName,
+            status: "online",
+          }
+          const newroomuser = firebase.database.ref("roomusers/").push()
+          newroomuser.set(newRoomUser)
+        }
+      })
+
+    history.push("/room/" + roomId)
+  }
+
   const updateUsername = (newName: string) => {
     firebase.auth.onAuthStateChanged((user) => {
       if (user) {
@@ -58,7 +104,11 @@ const RoomList: FunctionComponent = () => {
     })
   }
 
-  const createRoom = (room: { roomName: string; desc: string }) => {
+  const createRoom = (room: {
+    roomName: string
+    desc: string
+    users: number
+  }) => {
     firebase.database
       .ref("rooms/")
       .orderByChild("roomname")
@@ -106,9 +156,10 @@ const RoomList: FunctionComponent = () => {
               key={room.key}
               title={room.roomName}
               desc={room.desc}
-              url="#"
-              current={0}
+              url={room.key}
+              current={room.users}
               max={10}
+              onClick={() => enterChatRoom(room.roomName, room.key)}
             />
           ))
         )}

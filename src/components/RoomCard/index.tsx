@@ -8,6 +8,7 @@ interface RoomCardProps {
   desc: string
   current: number
   max: number
+  onClick: () => void
 }
 
 const RoomCard: FunctionComponent<RoomCardProps> = ({
@@ -16,6 +17,7 @@ const RoomCard: FunctionComponent<RoomCardProps> = ({
   desc,
   current,
   max,
+  onClick,
 }: RoomCardProps) => (
   <div className="roomcard">
     <div className="roomcard__left">
@@ -28,7 +30,7 @@ const RoomCard: FunctionComponent<RoomCardProps> = ({
       <p className="roomcard__desc">{desc}</p>
     </div>
     <div className="roomcard__right">
-      <Button text="Join" onClick={() => console.log("join")} />
+      <Button text="Join" onClick={onClick} />
     </div>
   </div>
 )

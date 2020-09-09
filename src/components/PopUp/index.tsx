@@ -5,17 +5,26 @@ import { useForm } from "../../hooks/useForm"
 import Button from "../Button"
 import { UserContext } from "../Firebase"
 
+interface PopUp {
+  popup: string
+  desc: string
+}
+
 interface PopUpInterface {
   onClick: {
     updateUsername: (string) => void
-    createRoom: (room: { roomName: string; desc: string }) => void
+    createRoom: (room: {
+      roomName: string
+      desc: string
+      users: number
+    }) => void
   }
 }
 
 const PopUp: FunctionComponent<PopUpInterface> = ({
   onClick,
 }: PopUpInterface) => {
-  const [formValue, setFormValue] = useForm({
+  const [formValue, setFormValue] = useForm<PopUp>({
     popup: "",
     desc: "",
   })
@@ -63,6 +72,7 @@ const PopUp: FunctionComponent<PopUpInterface> = ({
                 : onClick.createRoom({
                     roomName: formValue.popup,
                     desc: formValue.desc,
+                    users: 0,
                   })
               popup.setVisible(false)
             }}
