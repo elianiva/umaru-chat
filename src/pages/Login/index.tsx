@@ -3,7 +3,7 @@ import Umaru from "../../assets/umaru.png"
 import Form from "../../components/Form"
 import Button from "../../components/Button"
 import { Link, useHistory } from "react-router-dom"
-import { useForm } from "../../hooks/useForm"
+import { useForm } from "../../utils/useForm"
 import "./style.css"
 import { FirebaseContext, UserContext } from "../../components/Firebase"
 

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from "react"
 import "./style.css"
 import Form from "../Form"
-import { useForm } from "../../hooks/useForm"
+import { useForm } from "../../utils/useForm"
 import Button from "../Button"
 import { UserContext } from "../Firebase"
 
