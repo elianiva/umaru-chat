@@ -46,7 +46,7 @@ const RoomList: FunctionComponent = () => {
 
     firebase.database
       .ref("roomUsers/")
-      .orderByChild("roomname")
+      .orderByChild("roomName")
       .equalTo(roomName)
       .on("value", (resp) => {
         let roomuser = []
@@ -69,6 +69,7 @@ const RoomList: FunctionComponent = () => {
       })
 
     history.push("/room/" + roomId.replace(/-/, ""))
+    userContext.setRoomName(roomName)
   }
 
   const updateUsername = (newName: string) => {
