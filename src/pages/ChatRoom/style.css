@@ -116,6 +116,10 @@
   color: #ffffff;
 }
 
+.welcome {
+  align-self: center;
+}
+
 .chatroom__input {
   position: absolute;
   left: 0;
@@ -130,7 +134,6 @@
 .chatroom__input input {
   flex: 1;
   padding: 0.5rem;
-  font-size: 1.125rem;
   border: 1px #b0b0b0 solid;
   border-radius: 0.5rem;
 }
@@ -141,7 +144,6 @@
   border-radius: 0.5rem;
   background-color: #fe7970;
   color: #ffffff;
-  font-size: 1.125rem;
   font-family: "Nunito";
   font-weight: 600;
 }
