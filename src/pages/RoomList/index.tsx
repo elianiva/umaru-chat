@@ -35,17 +35,10 @@ const RoomList: FunctionComponent = () => {
 
   const enterChatRoom = (roomName: string, roomId: string) => {
     let chat = {
-      roomName: "",
-      displayName: "",
-      message: "",
-      date: "",
-      type: "",
-    }
-    chat = {
       roomName,
       displayName,
       date: Tempe(new Date()).format("hh:mm:ss"),
-      message: `${displayName} enter the room`,
+      message: `${displayName} joined`,
       type: "join",
     }
     const newMessage = firebase.database.ref("chats/").push()
