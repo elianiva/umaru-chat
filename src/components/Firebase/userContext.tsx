@@ -4,6 +4,7 @@ const UserContext = createContext<any | null>(null)
 
 const UserProvider: FunctionComponent = ({ children }) => {
   const [userData, setUserData] = useState({})
+  const [roomName, setRoomName] = useState("")
   const [isVisible, setVisible] = useState(false)
   const [type, setType] = useState("")
   const value = {
@@ -15,6 +16,8 @@ const UserProvider: FunctionComponent = ({ children }) => {
       type,
       setType,
     },
+    roomName,
+    setRoomName: (value) => setRoomName(value),
   }
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
