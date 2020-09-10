@@ -39,7 +39,7 @@ const ChatRoom: FunctionComponent = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setRoomName("njir")
+      setRoomName(user.roomName)
 
       firebase.database
         .ref("chats/")
@@ -58,7 +58,7 @@ const ChatRoom: FunctionComponent = () => {
     <div className="chatroom">
       <aside className="chatroom__side">
         <div className="chatroom__title">
-          <span>room of something</span>
+          <span>{user.roomName}</span>
         </div>
         <div className="chatroom__participants">
           <span className="chatroom__ptext">Participants (2/10)</span>
@@ -90,7 +90,9 @@ const ChatRoom: FunctionComponent = () => {
               <div
                 key={index}
                 className={`chatroom__chat ${
-                  chat.displayName === user.data.displayName
+                  chat.type === "join"
+                    ? "welcome"
+                    : chat.displayName === user.data.displayName
                     ? "active"
                     : "inacive"
                 }`}
