@@ -86,7 +86,7 @@
   flex-grow: 0;
   padding: 1rem;
   gap: 1rem;
-  min-height: 100%;
+  min-height: 88%;
   overflow-y: auto;
 }
 

@@ -3,6 +3,7 @@ import React, {
   useContext,
   useEffect,
   useState,
+  useRef,
 } from "react"
 import "./style.css"
 import Button from "../../components/Button"
@@ -19,6 +20,7 @@ const ChatRoom: FunctionComponent = () => {
   const [formValue, setFormValue] = useForm<{ message: string }>({
     message: "",
   })
+  const chatRef = useRef(null)
   const firebase = useContext(FirebaseContext)
   const user = useContext(UserContext)
   const history = useHistory()
@@ -37,6 +39,9 @@ const ChatRoom: FunctionComponent = () => {
     setFormValue("message", "")
   }
 
+  useEffect(() => {
+    chatRef.current.scrollTop = chatRef.current.scrollHeight
+  }, [chats])
   useEffect(() => {
     const fetchData = async () => {
       setRoomName(user.roomName)
