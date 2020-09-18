@@ -122,12 +122,16 @@ const RoomList: FunctionComponent = () => {
   }
 
   useEffect(() => {
-    const fetchData = async () => {
+    let mounted = true // for cleanup function
+
+    if (mounted) {
+      console.log("mounted roomlist")
       firebase.database.ref("rooms/").on("value", (resp) => {
         setRooms(snapshotToArray(resp))
       })
     }
-    fetchData()
+
+    return () => (mounted = false)
   }, [])
 
   return (

@@ -17,6 +17,12 @@ const ChatRoom: FunctionComponent = () => {
   const [roomName, setRoomName] = useState("")
   const [chats, setChats] = useState([])
   const [users, setUsers] = useState([])
+  const [roomData, setRoomData] = useState({
+    key: "",
+    desc: "",
+    roomName: "",
+    users: 0,
+  })
   const [formValue, setFormValue] = useForm<{ message: string }>({
     message: "",
   })
@@ -88,7 +94,8 @@ const ChatRoom: FunctionComponent = () => {
   }, [chats])
 
   useEffect(() => {
-    const fetchData = async () => {
+    let mounted = true // for cleanup function
+    if (mounted) {
       setRoomName(user.roomName)
 
       firebase.database
@@ -99,8 +106,20 @@ const ChatRoom: FunctionComponent = () => {
           setChats([])
           setChats(snapshotToArray(resp))
         })
+
+      // set current room data
+      firebase.database
+        .ref("rooms/")
+        .orderByChild("roomName")
+        .equalTo(user.roomName)
+        .on("value", (resp) => {
+          const rooms = snapshotToArray(resp)
+          const room = rooms.find((x) => x.roomName === user.roomName)
+          setRoomData(room)
+        })
     }
-    fetchData()
+
+    return () => (mounted = false)
   }, [roomName])
 
   return (
@@ -110,7 +129,9 @@ const ChatRoom: FunctionComponent = () => {
           <span>{user.roomName}</span>
         </div>
         <div className="chatroom__participants">
-          <span className="chatroom__ptext">Participants (2/10)</span>
+          <span className="chatroom__ptext">
+            Participants ({roomData.users}/10)
+          </span>
           <div className="chatroom__participant you">
             <img src={firebase.defaultProfile} alt="" />
             <span className="chatroom__username">You</span>
