@@ -110,13 +110,20 @@
   border-radius: 0.5rem;
 }
 
+.chatroom__name {
+  color: #fe7970;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-family: "Nunito", sans-serif;
+}
+
 .active {
   align-self: flex-end;
   background-color: #fe7970;
   color: #ffffff;
 }
 
-.welcome {
+.mid {
   align-self: center;
 }
 
