@@ -34,7 +34,7 @@ const RoomList: FunctionComponent = () => {
   } = userContext
 
   const enterChatRoom = (roomName: string, roomId: string) => {
-    let chat = {
+    const chat = {
       roomName,
       displayName,
       date: Tempe(new Date()).format("hh:mm:ss"),
@@ -48,7 +48,7 @@ const RoomList: FunctionComponent = () => {
       .ref("roomUsers/")
       .orderByChild("roomName")
       .equalTo(roomName)
-      .on("value", (resp) => {
+      .once("value", (resp) => {
         let roomuser = []
         roomuser = snapshotToArray(resp)
         const user: any = roomuser.find(
@@ -63,8 +63,8 @@ const RoomList: FunctionComponent = () => {
             displayName,
             status: "online",
           }
-          const newroomuser = firebase.database.ref("roomUsers/").push()
-          newroomuser.set(newRoomUser)
+          const newRoomUserRef = firebase.database.ref("roomUsers/").push()
+          newRoomUserRef.set(newRoomUser)
         }
       })
 
