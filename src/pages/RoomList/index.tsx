@@ -44,16 +44,16 @@ const RoomList: FunctionComponent = () => {
     const newMessage = firebase.database.ref("chats/").push()
     newMessage.set(chat)
 
+    // create new roomUser or set it to online
     firebase.database
       .ref("roomUsers/")
       .orderByChild("roomName")
       .equalTo(roomName)
       .once("value", (resp) => {
-        let roomuser = []
-        roomuser = snapshotToArray(resp)
+        const roomuser = snapshotToArray(resp)
         const user = roomuser.find((x) => x.displayName === displayName)
         if (user !== undefined) {
-          const userRef = firebase.database.ref("roomUsers/" + user.key)
+          const userRef = firebase.database.ref(`roomUsers/${user.key}`)
           userRef.update({ status: "online" })
         } else {
           const newRoomUser = {
