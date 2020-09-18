@@ -66,6 +66,20 @@ const RoomList: FunctionComponent = () => {
         }
       })
 
+    // update active users
+    firebase.database
+      .ref("rooms/")
+      .orderByChild("roomName")
+      .equalTo(roomName)
+      .once("value", (resp) => {
+        const rooms = snapshotToArray(resp)
+        const room = rooms.find((x) => x.roomName === roomName)
+        if (room !== undefined) {
+          const roomRef = firebase.database.ref(`rooms/${room.key}`)
+          roomRef.update({ users: room.users + 1 })
+        }
+      })
+
     history.push("/room/" + roomId.replace(/-/, ""))
     userContext.setRoomName(roomName)
   }

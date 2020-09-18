@@ -49,6 +49,7 @@ const ChatRoom: FunctionComponent = () => {
     const newMessage = firebase.database.ref("chats/").push()
     newMessage.set(chat)
 
+    // set user status to offline
     firebase.database
       .ref("roomUsers/")
       .orderByChild("displayName")
@@ -64,9 +65,24 @@ const ChatRoom: FunctionComponent = () => {
         }
       })
 
+    // update active users
+    firebase.database
+      .ref("rooms/")
+      .orderByChild("roomName")
+      .equalTo(roomName)
+      .once("value", (resp) => {
+        const rooms = snapshotToArray(resp)
+        const room = rooms.find((x) => x.roomName === roomName)
+        if (room !== undefined) {
+          const roomRef = firebase.database.ref(`rooms/${room.key}`)
+          roomRef.update({ users: room.users - 1 })
+        }
+      })
+
     history.goBack()
   }
 
+  // autoscroll to the last chat
   useEffect(() => {
     chatRef.current.scrollTop = chatRef.current.scrollHeight
   }, [chats])
