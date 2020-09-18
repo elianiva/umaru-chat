@@ -51,9 +51,7 @@ const RoomList: FunctionComponent = () => {
       .once("value", (resp) => {
         let roomuser = []
         roomuser = snapshotToArray(resp)
-        const user: any = roomuser.find(
-          (x: any) => x.displayName === displayName
-        )
+        const user = roomuser.find((x) => x.displayName === displayName)
         if (user !== undefined) {
           const userRef = firebase.database.ref("roomUsers/" + user.key)
           userRef.update({ status: "online" })
