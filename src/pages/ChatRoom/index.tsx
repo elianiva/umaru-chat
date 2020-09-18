@@ -24,7 +24,6 @@ const ChatRoom: FunctionComponent = () => {
   const firebase = useContext(FirebaseContext)
   const user = useContext(UserContext)
   const history = useHistory()
-  const username = "random dude on the internet"
 
   const sendMessage = () => {
     const chat = {
@@ -37,6 +36,35 @@ const ChatRoom: FunctionComponent = () => {
     const newMessage = firebase.database.ref("chats/").push()
     newMessage.set(chat)
     setFormValue("message", "")
+  }
+
+  const leaveRoom = () => {
+    const chat = {
+      roomName,
+      displayName: user.data.displayName,
+      date: Tempe(new Date()).format("hh:mm:ss"),
+      message: `${user.data.displayName} left`,
+      type: "leave",
+    }
+    const newMessage = firebase.database.ref("chats/").push()
+    newMessage.set(chat)
+
+    firebase.database
+      .ref("roomUsers/")
+      .orderByChild("displayName")
+      .equalTo(user.data.displayName)
+      .once("value", (resp) => {
+        const roomUsers = snapshotToArray(resp)
+        const currentUser = roomUsers.find(
+          (x) => x.displayName === user.data.displayName
+        )
+        if (currentUser != undefined) {
+          const userRef = firebase.database.ref(`roomUsers/${currentUser.key}`)
+          userRef.update({ status: "offline" })
+        }
+      })
+
+    history.goBack()
   }
 
   useEffect(() => {
@@ -71,37 +99,37 @@ const ChatRoom: FunctionComponent = () => {
             <img src={firebase.defaultProfile} alt="" />
             <span className="chatroom__username">You</span>
           </div>
-          <div className="chatroom__participant">
-            <img src={firebase.defaultProfile} alt="" />
-            <span className="chatroom__username">
-              {username.length > 16
-                ? `${username.substring(0, 16)}...`
-                : username}
-            </span>
-          </div>
+          {/* <div className="chatroom__participant"> */}
+          {/*   <img src={firebase.defaultProfile} alt="" /> */}
+          {/*   <span className="chatroom__username"> */}
+          {/*     {username.length > 16 */}
+          {/*       ? `${username.substring(0, 16)}...` */}
+          {/*       : username} */}
+          {/*   </span> */}
+          {/* </div> */}
         </div>
       </aside>
       <nav className="chatroom__navbar">
-        <Button
-          text="Leave Chat"
-          onClick={() => history.push("/rooms")}
-          inactive
-        />
+        <Button text="Leave Chat" onClick={leaveRoom} inactive />
       </nav>
       <main className="chatroom__main">
-        <div className="chatroom__chats">
+        <div ref={chatRef} className="chatroom__chats">
           {chats.map((chat: any, index: number) => {
             return (
               <div
                 key={index}
                 className={`chatroom__chat ${
-                  chat.type === "join"
-                    ? "welcome"
+                  chat.type === "join" || chat.type === "leave"
+                    ? "mid"
                     : chat.displayName === user.data.displayName
                     ? "active"
                     : "inacive"
                 }`}
               >
+                {chat.displayName !== user.data.displayName &&
+                chat.type === "message" ? (
+                  <p className="chatroom__name">{chat.displayName}</p>
+                ) : null}
                 {chat.message}
               </div>
             )
