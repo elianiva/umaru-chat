@@ -125,7 +125,6 @@ const RoomList: FunctionComponent = () => {
     let mounted = true // for cleanup function
 
     if (mounted) {
-      console.log("mounted roomlist")
       firebase.database.ref("rooms/").on("value", (resp) => {
         setRooms(snapshotToArray(resp))
       })

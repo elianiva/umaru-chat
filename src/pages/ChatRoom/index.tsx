@@ -126,7 +126,6 @@ const ChatRoom: FunctionComponent = () => {
         .equalTo(user.roomName)
         .on("value", (resp) => {
           const users = snapshotToArray(resp)
-          console.log(users)
           setUsers(users)
         })
     }
