@@ -70,6 +70,7 @@ const ChatRoom: FunctionComponent = () => {
   useEffect(() => {
     chatRef.current.scrollTop = chatRef.current.scrollHeight
   }, [chats])
+
   useEffect(() => {
     const fetchData = async () => {
       setRoomName(user.roomName)
@@ -83,7 +84,6 @@ const ChatRoom: FunctionComponent = () => {
           setChats(snapshotToArray(resp))
         })
     }
-
     fetchData()
   }, [roomName])
 
@@ -141,6 +141,7 @@ const ChatRoom: FunctionComponent = () => {
             name="message"
             placeholder="Type your message..."
             onChange={(e) => setFormValue(e.target.name, e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             value={formValue.message}
           />
           <button onClick={sendMessage}>Send</button>
