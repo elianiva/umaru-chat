@@ -45,7 +45,7 @@ const PopUp: FunctionComponent<PopUpInterface> = ({
           }
           value={formValue.popup}
           onChange={(e) => setFormValue(e.target.name, e.target.value)}
-          autocomplete="username"
+          autocomplete="none"
         />
         {popup.type !== "username" && (
           <Form
