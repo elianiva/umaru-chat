@@ -43,6 +43,7 @@
     "firebase": "^7.18.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "tempe": "^1.0.11"
   }
 }
