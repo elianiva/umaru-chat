@@ -95,6 +95,7 @@ const ChatRoom: FunctionComponent = () => {
 
   useEffect(() => {
     let mounted = true // for cleanup function
+
     if (mounted) {
       setRoomName(user.roomName)
 
@@ -117,6 +118,17 @@ const ChatRoom: FunctionComponent = () => {
           const room = rooms.find((x) => x.roomName === user.roomName)
           setRoomData(room)
         })
+
+      // set current room data
+      firebase.database
+        .ref("roomUsers/")
+        .orderByChild("roomName")
+        .equalTo(user.roomName)
+        .on("value", (resp) => {
+          const users = snapshotToArray(resp)
+          console.log(users)
+          setUsers(users)
+        })
     }
 
     return () => (mounted = false)
@@ -132,18 +144,19 @@ const ChatRoom: FunctionComponent = () => {
           <span className="chatroom__ptext">
             Participants ({roomData.users}/10)
           </span>
-          <div className="chatroom__participant you">
-            <img src={firebase.defaultProfile} alt="" />
-            <span className="chatroom__username">You</span>
-          </div>
-          {/* <div className="chatroom__participant"> */}
-          {/*   <img src={firebase.defaultProfile} alt="" /> */}
-          {/*   <span className="chatroom__username"> */}
-          {/*     {username.length > 16 */}
-          {/*       ? `${username.substring(0, 16)}...` */}
-          {/*       : username} */}
-          {/*   </span> */}
-          {/* </div> */}
+          {users.map(
+            (user) =>
+              user.status === "online" && (
+                <div className="chatroom__participant">
+                  <img src={firebase.defaultProfile} alt="profile" />
+                  <span className="chatroom__username ">
+                    {user.displayName.length > 16
+                      ? `${user.displayName.substring(0, 16)}...`
+                      : user.displayName}
+                  </span>
+                </div>
+              )
+          )}
         </div>
       </aside>
       <nav className="chatroom__navbar">
