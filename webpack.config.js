@@ -8,8 +8,8 @@ module.exports = {
     index: "./src/index.tsx"
   },
   output: {
-    filename: "[name].[hash].js",
-    chunkFilename: "[name].[hash].js",
+    filename: "chunk-[name]-[hash].js",
+    chunkFilename: "chunk-[name]-[hash].js",
     path: path.resolve(__dirname, "dist")
   },
   devServer: {
