@@ -6,17 +6,11 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
     index: "./src/index.tsx"
-    // pages: [
-    //   "./src/pages/Login/index.tsx",
-    //   "./src/pages/Register/index.tsx",
-    //   "./src/pages/NotFound/index.tsx",
-    //   "./src/pages/RoomList/index.tsx"
-    // ],
-    // components: [
-    //   "./src/components/Firebase/index.ts",
-    //   "./src/components/Form/index.tsx",
-    //   "./src/components/Button/index.tsx"
-    // ]
+  },
+  output: {
+    filename: "[name].[hash].js",
+    chunkFilename: "[name].[hash].js",
+    path: path.resolve(__dirname, "dist")
   },
   devServer: {
     historyApiFallback: true,
@@ -31,7 +25,19 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_module/,
-        use: "awesome-typescript-loader"
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [
+                "@babel/preset-env",
+                "@babel/preset-typescript",
+                "@babel/preset-react"
+              ],
+              plugins: ["@babel/plugin-syntax-dynamic-import"]
+            }
+          }
+        ]
       },
       {
         test: /\.css$/,
@@ -54,7 +60,24 @@ module.exports = {
   ],
   optimization: {
     splitChunks: {
-      chunks: "all"
+      chunks: "all",
+      maxInitialRequests: Infinity,
+      minSize: 0,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            // get the name. E.g. node_modules/packageName/not/this/part.js
+            // or node_modules/packageName
+            const packageName = module.context.match(
+              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+            )[1]
+
+            // npm package names are URL-safe, but some servers don't like @ symbols
+            return `npm.${packageName.replace("@", "")}`
+          }
+        }
+      }
     }
   }
 }
