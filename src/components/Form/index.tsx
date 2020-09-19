@@ -4,6 +4,7 @@ import React, {
   FunctionComponent,
   FormEvent,
   ChangeEvent,
+  KeyboardEvent,
 } from "react"
 import "./style.css"
 import EyeIcon from "../../assets/eye.svg"
@@ -15,7 +16,7 @@ interface FormProps {
   placeholder: string
   value: string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
-  onKeyDown?: (e: KeyboardEvent) => void
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void
   autocomplete: string
 }
 
