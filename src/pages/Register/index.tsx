@@ -11,9 +11,14 @@ import { Link, useHistory } from "react-router-dom"
 import { useForm } from "../../utils/useForm"
 import "./style.css"
 import { FirebaseContext, UserContext } from "../../components/Firebase"
+import "regenerator-runtime"
 
 const Register: FunctionComponent = () => {
   const [firstStep, setFirstStep] = useState(true)
+  const [error, setError] = useState({
+    status: false,
+    message: "",
+  })
   const [formValue, setFormValue] = useForm({
     username: "",
     email: "",
@@ -24,15 +29,27 @@ const Register: FunctionComponent = () => {
   const user = useContext(UserContext)
   const history = useHistory()
 
-  const isInvalid = formValue.username === "" || formValue.email === ""
+  const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+  const isInvalid =
+    formValue.username === "" ||
+    formValue.email === "" ||
+    !emailRegex.test(formValue.email)
   const isPasswordInvalid =
     formValue.password !== formValue.password2 || formValue.password === ""
 
-  const register = () => {
+  const register = async () => {
     const { username, email, password } = formValue
-    firebase.register(email, password, username).then(() => {
+    try {
+      await firebase.register(email, password, username)
       history.push("/login")
-    })
+    } catch (err) {
+      setFirstStep(true)
+      setError({
+        status: true,
+        message: err.message,
+      })
+    }
   }
 
   useEffect(() => {
@@ -45,6 +62,7 @@ const Register: FunctionComponent = () => {
         <img src={Umaru} alt="Umaru" className="login__avatar" />
         {firstStep ? (
           <>
+            {error.status && <p className="err-msg">{error.message}</p>}
             <Form
               name="username"
               type="text"
@@ -63,6 +81,9 @@ const Register: FunctionComponent = () => {
               onChange={(e) => setFormValue(e.target.name, e.target.value)}
               autocomplete="email"
             />
+            {formValue.email.length && isInvalid ? (
+              <p className="err-msg">Wrong email format</p>
+            ) : null}
             <Button
               disabled={isInvalid}
               text={firstStep ? "Next" : "Register"}
@@ -90,6 +111,15 @@ const Register: FunctionComponent = () => {
               onChange={(e) => setFormValue(e.target.name, e.target.value)}
               autocomplete="off"
             />
+
+            {formValue.password.length && formValue.password.length < 6 ? (
+              <p className="err-msg">
+                Password needs to be at least 6 characters long
+              </p>
+            ) : formValue.password.length && isPasswordInvalid ? (
+              <p className="err-msg">Password needs to match</p>
+            ) : null}
+
             <Button
               disabled={isPasswordInvalid}
               text={firstStep ? "Next" : "Register"}

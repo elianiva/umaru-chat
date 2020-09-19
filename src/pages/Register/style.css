@@ -43,3 +43,10 @@
   color: #ed4e4e;
   font-weight: 600;
 }
+
+.err-msg {
+  color: #ca3a3a;
+  background-color: #ffc5c5;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.25rem;
+}
