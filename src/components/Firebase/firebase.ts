@@ -4,14 +4,14 @@ import "firebase/storage"
 import "firebase/database"
 
 const config = {
-  apiKey: "AIzaSyBY-TMRxlkaRXB9_HfcwAMvjk8-L-l4RJM",
-  authDomain: "umaru-chat.firebaseapp.com",
-  databaseURL: "https://umaru-chat.firebaseio.com",
-  projectId: "umaru-chat",
-  storageBucket: "umaru-chat.appspot.com",
-  messagingSenderId: "90854893572",
-  appId: "1:90854893572:web:6eec404000f43e5ec4ad51",
-  measurementId: "G-Z03MRT5DFV",
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
 }
 
 class Firebase {
