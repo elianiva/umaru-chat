@@ -57,6 +57,7 @@ const Login: FunctionComponent = () => {
           placeholder="••••••••••"
           value={formValue.password}
           onChange={(e) => setFormValue(e.target.name, e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && login()}
           autocomplete="off"
         />
         <Button

@@ -1,4 +1,10 @@
-import React, { useState, useEffect, FunctionComponent } from "react"
+import React, {
+  useState,
+  useEffect,
+  FunctionComponent,
+  FormEvent,
+  ChangeEvent,
+} from "react"
 import "./style.css"
 import EyeIcon from "../../assets/eye.svg"
 
@@ -8,7 +14,8 @@ interface FormProps {
   label: string
   placeholder: string
   value: string
-  onChange: any
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  onKeyDown?: (e: KeyboardEvent) => void
   autocomplete: string
 }
 
@@ -19,6 +26,7 @@ const Form: FunctionComponent<FormProps> = ({
   placeholder,
   value,
   onChange,
+  onKeyDown,
   autocomplete,
 }: FormProps) => {
   const [isVisible, setVisible] = useState(false)
@@ -35,6 +43,7 @@ const Form: FunctionComponent<FormProps> = ({
             placeholder={isVisible ? "password" : placeholder}
             value={value}
             onChange={onChange}
+            onKeyDown={onKeyDown}
             required
           />
           <div className="form__toggler">
