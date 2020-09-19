@@ -31,7 +31,7 @@ export default function App() {
             <ChatRoom />
           </PrivateRoute>
           <Route path="*">
-            <Notfound />
+            <NotFound />
           </Route>
         </Switch>
       </Suspense>
