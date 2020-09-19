@@ -188,6 +188,7 @@ const ChatRoom: FunctionComponent = () => {
           <input
             type="text"
             name="message"
+            autoComplete="off"
             placeholder="Type your message..."
             onChange={(e) => setFormValue(e.target.name, e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
