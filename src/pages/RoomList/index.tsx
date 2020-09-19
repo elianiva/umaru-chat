@@ -80,7 +80,7 @@ const RoomList: FunctionComponent = () => {
         }
       })
 
-    history.push("/room/" + roomId.replace(/-/, ""))
+    history.push("/room/" + roomId.replace(/-/g, ""))
     userContext.setRoomName(roomName)
   }
 
