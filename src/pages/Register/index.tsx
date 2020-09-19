@@ -78,12 +78,7 @@ const Register: FunctionComponent = () => {
               label="Password"
               placeholder="••••••••••"
               value={formValue.password}
-              onChange={(e: InputEvent) =>
-                setFormValue(
-                  (e?.target as HTMLInputElement)?.name,
-                  (e?.target as HTMLInputElement)?.value
-                )
-              }
+              onChange={(e) => setFormValue(e.target.name, e.target.value)}
               autocomplete="off"
             />
             <Form
@@ -92,12 +87,7 @@ const Register: FunctionComponent = () => {
               label="Reenter Password"
               placeholder="••••••••••"
               value={formValue.password2}
-              onChange={(e: InputEvent) =>
-                setFormValue(
-                  (e?.target as HTMLInputElement)?.name,
-                  (e?.target as HTMLInputElement)?.value
-                )
-              }
+              onChange={(e) => setFormValue(e.target.name, e.target.value)}
               autocomplete="off"
             />
             <Button
